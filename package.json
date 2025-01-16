@@ -1,0 +1,24 @@
+{
+  "name": "bi-calculator",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "tailwind:build": "npx tailwindcss -i ./css/input.css -o ./css/style.css -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NasaHack/bi-calculator.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/NasaHack/bi-calculator/issues"
+  },
+  "homepage": "https://github.com/NasaHack/bi-calculator#readme",
+  "description": "",
+  "dependencies": {
+    "tailwindcss": "^3.4.17"
+  }
+}

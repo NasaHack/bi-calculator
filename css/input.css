@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  #mode-switch button {
+    @apply border-2 border-transparent hover:cursor-pointer;
+  }
+
+  #mode-switch button.active {
+    @apply border-2 border-gray-500;
+  }
+  #mode-switch button.active {
+    @apply border-2 border-gray-500;
+  }
+
+  #pads .non-numeric-keys {
+    @apply !bg-gray-400;
+  }
+
+  #pads .pads-button.disabled {
+    @apply !bg-[#cd5050cd] hover:cursor-not-allowed;
+  }
+
+  #pads .non-numeric-keys.disabled {
+    @apply !bg-[#cd5050cd] hover:cursor-not-allowed;
+  }
+
+  #pads .pads-button {
+    @apply bg-[#32c92f97];
+  }
+
+  .pads-button {
+    @apply size-[45px] border  font-bold text-2xl rounded-tl-[10px] rounded-br-[10px] hover:cursor-pointer;
+  }
+}
+
+.custom-scroll::-webkit-scrollbar,
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+.custom-scroll::-webkit-scrollbar-track,
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb,
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: blue;
+  border-radius: 20px;
+  border: 3px solid transparent;
+}
+.custom-scroll::-webkit-scrollbar-thumb:hover,
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  cursor: pointer;
+}

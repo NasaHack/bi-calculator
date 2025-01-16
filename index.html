@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="./css/style.css" />
+    <title>Calculator</title>
+  </head>
+  <body>
+    <main
+      class="min-h-screen flex justify-center items-center"
+      style="
+        background: radial-gradient(
+          circle,
+          rgba(174, 184, 238, 1) 41%,
+          rgba(148, 233, 202, 1) 100%
+        );
+      "
+    >
+      <div
+        class="w-[330px] rounded-md overflow-hidden shadow-[3px_5px_5px_3px_rgba(0,0,0,0.30)] bg-[rgb(244,200,255)]"
+      >
+        <div
+          id="calculator"
+          class="w-full p-3 shadow-[inset_0px_0px_10px_2px_rgba(0,0,0,1)] bg-[rgb(244,200,255)]"
+        >
+          <div id="heading" class="flex justify-between font-bold mb-2">
+            <span>Proah <span class="text-red-800">-19</span> </span
+            ><span
+              class="size-[18px] rounded-full shadow-[inset_0px_0px_7px_2px_rgba(0,0,0,0.70)] flex justify-center items-center border border-[rgba(1,1,1,0.7)]"
+              ><span class="size-1 rounded-full bg-[rgba(174,184,238,1)]"></span
+            ></span>
+          </div>
+          <div>
+            <div id="mode-switch" class="flex gap-2">
+              <button
+                class="border text-gray-900 font-semibold text-sm rounded-lg w-full p-2.5 bg-[rgba(148,233,202,0.50)]"
+                id="mode-button"
+              >
+                Mode
+              </button>
+              <button
+                class="border text-gray-900 font-semibold text-sm rounded-lg w-full p-2.5 bg-[rgba(148,233,202,0.50)]"
+                id="conversion-btn"
+              >
+                Conversion
+              </button>
+            </div>
+
+            <div class="my-1">
+              <select
+                id="mode-selector"
+                class="bg-gray-50 border text-gray-900 font-semibold text-sm rounded-lg w-full p-2.5 bg-[rgba(148,233,202,0.50)] placeholder-gray-400 focus:outline-none"
+              >
+                <option value="bin">Binary</option>
+                <option value="oct">Octal</option>
+                <option value="dec">Decimal</option>
+                <option value="hex">Hexadecimal</option>
+              </select>
+              <select
+                id="conversion-selector"
+                class="bg-gray-50 border text-gray-900 font-semibold text-sm rounded-lg w-full p-2.5 bg-[rgba(148,233,202,0.50)] placeholder-gray-400 focus:outline-none"
+              ></select>
+            </div>
+          </div>
+          <div
+            id="display"
+            class="shadow-[inset_0px_0px_7px_2px_rgba(0,0,0,0.70)] rounded-md px-2 bg-[rgba(148,233,202,0.3)] text-xl font-semibold my-2 h-[50px] leading-[50px] overflow-x-auto overflow-y-hidden custom-scroll"
+          ></div>
+          <div
+            id="conversion-result"
+            class="shadow-[inset_0px_0px_7px_2px_rgba(0,0,0,0.70)] rounded-md px-2 bg-[rgba(148,233,202,0.3)] text-xl font-semibold my-2 h-[50px] leading-[50px]"
+          ></div>
+          <div
+            id="pads"
+            class="flex flex-wrap justify-between flex-row gap-2 p-4 shadow-[inset_0px_0px_7px_2px_rgba(0,0,0,0.70)] rounded-md"
+          >
+            <button class="pads-button">
+              <i class="fa-solid fa-broom"></i>
+            </button>
+            <button class="pads-button">Del</button>
+            <button class="pads-button">.</button>
+            <button class="pads-button">%</button>
+            <button class="pads-button">÷</button>
+
+            <button class="pads-button">C</button>
+            <button class="pads-button">D</button>
+            <button class="pads-button">E</button>
+            <button class="pads-button">F</button>
+            <button class="pads-button">×</button>
+
+            <button class="pads-button">8</button>
+            <button class="pads-button">9</button>
+            <button class="pads-button">A</button>
+            <button class="pads-button">B</button>
+
+            <button class="pads-button">-</button>
+
+            <button class="pads-button">4</button>
+            <button class="pads-button">5</button>
+            <button class="pads-button">6</button>
+            <button class="pads-button">7</button>
+
+            <button class="pads-button">+</button>
+
+            <button class="pads-button">0</button>
+            <button class="pads-button">1</button>
+            <button class="pads-button">2</button>
+            <button class="pads-button">3</button>
+
+            <button class="pads-button">=</button>
+          </div>
+        </div>
+      </div>
+    </main>
+    <!-- Script -->
+    <script src="./js/main.js" type="module"></script>
+  </body>
+</html>
