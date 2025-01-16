@@ -166,7 +166,8 @@ const reducer = (state = initialState, action) => {
 
           switch (operator) {
             case "+": {
-              let result = arithmetic.addition(operandA, operandB);
+              const addend = state.input.split(operator);
+              let result = arithmetic.addition(addend);
               if (result === "NaN") {
                 handleRefresh(1200);
                 return "Malformed expression";
@@ -174,7 +175,8 @@ const reducer = (state = initialState, action) => {
               return result;
             }
             case "-": {
-              let result = arithmetic.subtraction(operandA, operandB);
+              const sequentialSubtractor = state.input.split(operator);
+              let result = arithmetic.subtraction(sequentialSubtractor);
               if (result === "NaN") {
                 handleRefresh(1200);
                 return "Malformed expression";
@@ -182,7 +184,8 @@ const reducer = (state = initialState, action) => {
               return result;
             }
             case "×": {
-              let result = arithmetic.multiply(operandA, operandB);
+              const fractor = state.input.split(operator);
+              let result = arithmetic.multiply(fractor);
               if (result === "NaN") {
                 handleRefresh(1200);
                 return "Malformed expression";
@@ -190,7 +193,8 @@ const reducer = (state = initialState, action) => {
               return result;
             }
             case "÷": {
-              let result = arithmetic.division(operandA, operandB);
+              const sequentialDivisor = state.input.split(operator);
+              let result = arithmetic.division(sequentialDivisor);
               if (result === "NaN") {
                 handleRefresh(1200);
                 return "Malformed expression";
@@ -198,7 +202,8 @@ const reducer = (state = initialState, action) => {
               return result;
             }
             case "%": {
-              let result = arithmetic.remainder(operandA, operandB);
+              const sequentialRemainder = state.input.split(operator);
+              let result = arithmetic.remainder(sequentialRemainder);
               if (result === "NaN") {
                 handleRefresh(1200);
                 return "Malformed expression";

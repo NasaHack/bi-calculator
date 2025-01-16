@@ -20,7 +20,8 @@ class Arithmetic {
     });
   };
 
-  addition(...addend) {
+  addition(addend) {
+    console.log(addend);
     // Check if any digit of a numbers that cross the binary base of 2
     this.isCrossBase(addend);
 
@@ -31,17 +32,18 @@ class Arithmetic {
     return sum.toString(this.base);
   }
 
-  subtraction(minuend, subtrahend) {
+  subtraction(sequentialSubtractor) {
     // Check if any digit of a numbers that cross the binary base of 2
-    this.isCrossBase([minuend, subtrahend]);
+    this.isCrossBase(sequentialSubtractor);
 
     // perform subtraction
-    let subtract =
-      parseInt(minuend, this.base) - parseInt(subtrahend, this.base);
+    let subtract = sequentialSubtractor.reduce(
+      (prev, acc) => parseInt(prev, this.base) - parseInt(acc, this.base)
+    );
     return subtract.toString(this.base);
   }
 
-  multiply(...factor) {
+  multiply(factor) {
     // Check if any digit of a numbers that cross the binary base of 2
     this.isCrossBase(factor);
 
@@ -52,24 +54,26 @@ class Arithmetic {
     return product.toString(this.base);
   }
 
-  division(dividend, divisor) {
+  division(sequentialDivisor) {
     // Check if any digit of a numbers that cross the binary base of 2
-    this.isCrossBase([dividend, divisor]);
+    this.isCrossBase(sequentialDivisor);
 
     // perform division
-    const quotient =
-      parseInt(dividend, this.base) / parseInt(divisor, this.base);
+    const quotient = sequentialDivisor.reduce(
+      (prev, acc) => parseInt(prev, this.base) / parseInt(acc, this.base)
+    );
 
     return quotient.toString(this.base);
   }
 
-  remainder(dividend, divisor) {
+  remainder(sequentialRemainder) {
     // Check if any digit of a numbers that cross the binary base of 2
-    this.isCrossBase([dividend, divisor]);
+    this.isCrossBase(sequentialRemainder);
 
     // perform division
-    const quotient =
-      parseInt(dividend, this.base) % parseInt(divisor, this.base);
+    const quotient = sequentialRemainder.reduce(
+      (prev, acc) => parseInt(prev, this.base) % parseInt(acc, this.base)
+    );
 
     return quotient.toString(this.base);
   }
