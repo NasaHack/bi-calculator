@@ -22,7 +22,7 @@ class Arithmetic {
 
   addition(addend) {
     console.log(addend);
-    // Check if any digit of a numbers that cross the binary base of 2
+    // Check if any digit of a numbers that cross the tergeted base
     this.isCrossBase(addend);
 
     // perform addition
@@ -33,7 +33,7 @@ class Arithmetic {
   }
 
   subtraction(sequentialSubtractor) {
-    // Check if any digit of a numbers that cross the binary base of 2
+    // Check if any digit of a numbers that cross the tergeted base
     this.isCrossBase(sequentialSubtractor);
 
     // perform subtraction
@@ -44,7 +44,7 @@ class Arithmetic {
   }
 
   multiply(factor) {
-    // Check if any digit of a numbers that cross the binary base of 2
+    // Check if any digit of a numbers that cross the tergeted base
     this.isCrossBase(factor);
 
     // perform multiply
@@ -55,7 +55,7 @@ class Arithmetic {
   }
 
   division(sequentialDivisor) {
-    // Check if any digit of a numbers that cross the binary base of 2
+    // Check if any digit of a numbers that cross the tergeted base
     this.isCrossBase(sequentialDivisor);
 
     // perform division
@@ -67,7 +67,7 @@ class Arithmetic {
   }
 
   remainder(sequentialRemainder) {
-    // Check if any digit of a numbers that cross the binary base of 2
+    // Check if any digit of a numbers that cross the tergeted base
     this.isCrossBase(sequentialRemainder);
 
     // perform division

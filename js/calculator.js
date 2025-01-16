@@ -444,11 +444,11 @@ const handleMissingOperand = (input) => {
 };
 
 const dispalyInput = (input) => {
-  common.display.innerHTML = input;
+  common.display.innerHTML = input.toUpperCase();
 };
 
 const displayConversion = (result) => {
-  common.conversionResult.innerHTML = result;
+  common.conversionResult.innerHTML = result.toUpperCase();
 };
 
 const handleDisabledORKeys = (mode) => {
