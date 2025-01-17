@@ -26,7 +26,7 @@ class Arithmetic {
 
     // perform addition
     let sum = addend.reduce(
-      (prev, acc) => parseFloat(prev, this.base) + parseFloat(acc, this.base)
+      (prev, acc) => parseInt(prev, this.base) + parseInt(acc, this.base)
     );
     return sum.toString(this.base);
   }
@@ -37,7 +37,7 @@ class Arithmetic {
 
     // perform subtraction
     let subtract = sequentialSubtractor.reduce(
-      (prev, acc) => parseFloat(prev, this.base) - parseFloat(acc, this.base)
+      (prev, acc) => parseInt(prev, this.base) - parseInt(acc, this.base)
     );
     return subtract.toString(this.base);
   }
@@ -48,7 +48,7 @@ class Arithmetic {
 
     // perform multiply
     let product = factor.reduce(
-      (prev, acc) => parseFloat(prev, this.base) * parseFloat(acc, this.base)
+      (prev, acc) => parseInt(prev, this.base) * parseInt(acc, this.base)
     );
     return product.toString(this.base);
   }
@@ -59,7 +59,7 @@ class Arithmetic {
 
     // perform division
     const quotient = sequentialDivisor.reduce(
-      (prev, acc) => parseFloat(prev, this.base) / parseFloat(acc, this.base)
+      (prev, acc) => parseInt(prev, this.base) / parseInt(acc, this.base)
     );
 
     return quotient.toString(this.base);
@@ -71,7 +71,7 @@ class Arithmetic {
 
     // perform division
     const quotient = sequentialRemainder.reduce(
-      (prev, acc) => parseFloat(prev, this.base) % parseFloat(acc, this.base)
+      (prev, acc) => parseInt(prev, this.base) % parseInt(acc, this.base)
     );
 
     return quotient.toString(this.base);
