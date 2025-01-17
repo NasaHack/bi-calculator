@@ -20,13 +20,32 @@ class Arithmetic {
     });
   };
 
+  parseToDecimal = (number, base) => {
+    if (this.base <= 10) {
+      return parseFloat(number, base);
+    } else {
+      if (number.toString().includes(".")) {
+        let [int, frac] = number.toString().split(".");
+
+        int = parseInt(int, base);
+        frac = parseInt(frac, base);
+
+        return Number(int + "." + frac);
+      } else {
+        return parseInt(number, base);
+      }
+    }
+  };
+
   addition(addend) {
     // Check if any digit of a numbers that cross the tergeted base
     this.isCrossBase(addend);
 
     // perform addition
     let sum = addend.reduce(
-      (prev, acc) => parseInt(prev, this.base) + parseInt(acc, this.base)
+      (prev, acc) =>
+        this.parseToDecimal(prev, this.base) +
+        this.parseToDecimal(acc, this.base)
     );
     return sum.toString(this.base);
   }
@@ -37,7 +56,9 @@ class Arithmetic {
 
     // perform subtraction
     let subtract = sequentialSubtractor.reduce(
-      (prev, acc) => parseInt(prev, this.base) - parseInt(acc, this.base)
+      (prev, acc) =>
+        this.parseToDecimal(prev, this.base) -
+        this.parseToDecimal(acc, this.base)
     );
     return subtract.toString(this.base);
   }
@@ -48,7 +69,9 @@ class Arithmetic {
 
     // perform multiply
     let product = factor.reduce(
-      (prev, acc) => parseInt(prev, this.base) * parseInt(acc, this.base)
+      (prev, acc) =>
+        this.parseToDecimal(prev, this.base) *
+        this.parseToDecimal(acc, this.base)
     );
     return product.toString(this.base);
   }
@@ -59,7 +82,9 @@ class Arithmetic {
 
     // perform division
     const quotient = sequentialDivisor.reduce(
-      (prev, acc) => parseInt(prev, this.base) / parseInt(acc, this.base)
+      (prev, acc) =>
+        this.parseToDecimal(prev, this.base) /
+        this.parseToDecimal(acc, this.base)
     );
 
     return quotient.toString(this.base);
@@ -71,7 +96,9 @@ class Arithmetic {
 
     // perform division
     const quotient = sequentialRemainder.reduce(
-      (prev, acc) => parseInt(prev, this.base) % parseInt(acc, this.base)
+      (prev, acc) =>
+        this.parseToDecimal(prev, this.base) %
+        this.parseToDecimal(acc, this.base)
     );
 
     return quotient.toString(this.base);
@@ -80,8 +107,18 @@ class Arithmetic {
   // Perform calculation with eval function if all the operators are not same
   genericCalculation(expression) {
     let validateMDoperator = expression.replace("×", "*").replace("÷", "/");
+
+    const regex =
+      /(?<![0-9a-fA-Fx])\b([0-9]+(?:\.[0-9]+)?|[a-zA-Z][a-zA-Z0-9]*)\b/g;
+
     try {
-      return eval(validateMDoperator).toString(this.base);
+      if (this.base <= 10) {
+        return eval(validateMDoperator).toString(this.base);
+      } else {
+        return eval(validateMDoperator.replace(regex, "0x$1")).toString(
+          this.base
+        );
+      }
     } catch (error) {
       return "NaN";
     }
