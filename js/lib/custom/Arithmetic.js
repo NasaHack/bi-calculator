@@ -21,13 +21,12 @@ class Arithmetic {
   };
 
   addition(addend) {
-    console.log(addend);
     // Check if any digit of a numbers that cross the tergeted base
     this.isCrossBase(addend);
 
     // perform addition
     let sum = addend.reduce(
-      (prev, acc) => parseInt(prev, this.base) + parseInt(acc, this.base)
+      (prev, acc) => parseFloat(prev, this.base) + parseFloat(acc, this.base)
     );
     return sum.toString(this.base);
   }
@@ -38,7 +37,7 @@ class Arithmetic {
 
     // perform subtraction
     let subtract = sequentialSubtractor.reduce(
-      (prev, acc) => parseInt(prev, this.base) - parseInt(acc, this.base)
+      (prev, acc) => parseFloat(prev, this.base) - parseFloat(acc, this.base)
     );
     return subtract.toString(this.base);
   }
@@ -49,7 +48,7 @@ class Arithmetic {
 
     // perform multiply
     let product = factor.reduce(
-      (prev, acc) => parseInt(prev, this.base) * parseInt(acc, this.base)
+      (prev, acc) => parseFloat(prev, this.base) * parseFloat(acc, this.base)
     );
     return product.toString(this.base);
   }
@@ -60,7 +59,7 @@ class Arithmetic {
 
     // perform division
     const quotient = sequentialDivisor.reduce(
-      (prev, acc) => parseInt(prev, this.base) / parseInt(acc, this.base)
+      (prev, acc) => parseFloat(prev, this.base) / parseFloat(acc, this.base)
     );
 
     return quotient.toString(this.base);
@@ -72,10 +71,20 @@ class Arithmetic {
 
     // perform division
     const quotient = sequentialRemainder.reduce(
-      (prev, acc) => parseInt(prev, this.base) % parseInt(acc, this.base)
+      (prev, acc) => parseFloat(prev, this.base) % parseFloat(acc, this.base)
     );
 
     return quotient.toString(this.base);
+  }
+
+  // Perform calculation with eval function if all the operators are not same
+  genericCalculation(expression) {
+    let validateMDoperator = expression.replace("×", "*").replace("÷", "/");
+    try {
+      return eval(validateMDoperator).toString(this.base);
+    } catch (error) {
+      return "NaN";
+    }
   }
 }
 

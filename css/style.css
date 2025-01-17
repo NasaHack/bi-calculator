@@ -664,6 +664,19 @@ video {
   overflow-y: hidden;
 }
 
+.hyphens-none {
+  -webkit-hyphens: none;
+          hyphens: none;
+}
+
+.whitespace-nowrap {
+  white-space: nowrap;
+}
+
+.break-words {
+  overflow-wrap: break-word;
+}
+
 .rounded-full {
   border-radius: 9999px;
 }
@@ -723,6 +736,10 @@ video {
   padding-right: 0.5rem;
 }
 
+.text-\[40px\] {
+  font-size: 40px;
+}
+
 .text-sm {
   font-size: 0.875rem;
   line-height: 1.25rem;
@@ -731,15 +748,6 @@ video {
 .text-xl {
   font-size: 1.25rem;
   line-height: 1.75rem;
-}
-
-.text-2xl {
-  font-size: 1.5rem;
-  line-height: 2rem;
-}
-
-.text-\[40px\] {
-  font-size: 40px;
 }
 
 .font-bold {
@@ -762,10 +770,6 @@ video {
 .text-red-800 {
   --tw-text-opacity: 1;
   color: rgb(153 27 27 / var(--tw-text-opacity, 1));
-}
-
-.text-\[\] {
-  color: ;
 }
 
 .placeholder-gray-400::-moz-placeholder {

@@ -139,16 +139,6 @@ const reducer = (state = initialState, action) => {
         ...state,
 
         input: (() => {
-          const operator =
-            state.input[
-              state.input.split("").findIndex((char, i) => {
-                if (i > 0) {
-                  return state.orReadOnly.includes(char);
-                }
-              })
-            ];
-          const [operandA, operandB] = state.input.split(operator);
-
           const arithmetic = new Arithmetic(
             (() => {
               switch (state.modeType) {
@@ -164,52 +154,83 @@ const reducer = (state = initialState, action) => {
             })()
           );
 
-          switch (operator) {
-            case "+": {
-              const addend = state.input.split(operator);
-              let result = arithmetic.addition(addend);
-              if (result === "NaN") {
-                handleRefresh(1200);
-                return "Malformed expression";
+          const operator =
+            state.input[
+              state.input.split("").findIndex((char, i) => {
+                if (i > 0) {
+                  return state.orReadOnly.includes(char);
+                }
+              })
+            ];
+
+          let isSameOperator = (() => {
+            let operators = [];
+            state.input.split("").forEach((char) => {
+              if (state.orReadOnly.includes(char)) {
+                operators.push(char);
               }
-              return result;
-            }
-            case "-": {
-              const sequentialSubtractor = state.input.split(operator);
-              let result = arithmetic.subtraction(sequentialSubtractor);
-              if (result === "NaN") {
-                handleRefresh(1200);
-                return "Malformed expression";
+            });
+
+            return operators.every((operator) => {
+              return operator === operators[0];
+            });
+          })();
+
+          if (isSameOperator) {
+            switch (operator) {
+              case "+": {
+                const addend = state.input.split(operator);
+                let result = arithmetic.addition(addend);
+                if (result === "NaN") {
+                  handleRefresh(1200);
+                  return "Malformed expression";
+                }
+                return result;
               }
-              return result;
-            }
-            case "×": {
-              const fractor = state.input.split(operator);
-              let result = arithmetic.multiply(fractor);
-              if (result === "NaN") {
-                handleRefresh(1200);
-                return "Malformed expression";
+              case "-": {
+                const sequentialSubtractor = state.input.split(operator);
+                let result = arithmetic.subtraction(sequentialSubtractor);
+                if (result === "NaN") {
+                  handleRefresh(1200);
+                  return "Malformed expression";
+                }
+                return result;
               }
-              return result;
-            }
-            case "÷": {
-              const sequentialDivisor = state.input.split(operator);
-              let result = arithmetic.division(sequentialDivisor);
-              if (result === "NaN") {
-                handleRefresh(1200);
-                return "Malformed expression";
+              case "×": {
+                const fractor = state.input.split(operator);
+                let result = arithmetic.multiply(fractor);
+                if (result === "NaN") {
+                  handleRefresh(1200);
+                  return "Malformed expression";
+                }
+                return result;
               }
-              return result;
-            }
-            case "%": {
-              const sequentialRemainder = state.input.split(operator);
-              let result = arithmetic.remainder(sequentialRemainder);
-              if (result === "NaN") {
-                handleRefresh(1200);
-                return "Malformed expression";
+              case "÷": {
+                const sequentialDivisor = state.input.split(operator);
+                let result = arithmetic.division(sequentialDivisor);
+                if (result === "NaN") {
+                  handleRefresh(1200);
+                  return "Malformed expression";
+                }
+                return result;
               }
-              return result;
+              case "%": {
+                const sequentialRemainder = state.input.split(operator);
+                let result = arithmetic.remainder(sequentialRemainder);
+                if (result === "NaN") {
+                  handleRefresh(1200);
+                  return "Malformed expression";
+                }
+                return result;
+              }
             }
+          } else {
+            let result = arithmetic.genericCalculation(state.input);
+            if (result === "NaN") {
+              handleRefresh(1200);
+              return "Malformed expression";
+            }
+            return result;
           }
         })(),
       };
