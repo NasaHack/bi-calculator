@@ -1,6 +1,8 @@
-# Bi Calculator
+<h1 align="center">Bi Calculator<h1>
 
-![Bi-Calculator](./image/bi-calculator.png)
+<div align="center">
+  <img src="./image/bi-calculator.png">
+</div>
 
 ## Why did I create this?
 
@@ -42,12 +44,12 @@ That means, we can calculate any arithmetic operation with This Number System. a
    - Hexadecimal to Octal
    - Hexadecimal to Decimal
 
-## Technology: That i Used
-
-- **html**, **tailwindcss**, **JavaScript**
-- **Redux**
-
-## Resourses: That i followed
+**Resources: That i have been following**
 
 1. [https://github.com/NasaHack/Number-System](https://github.com/NasaHack/Number-System)
 2. [https://github.com/NasaHack/play-with-numbers](https://github.com/NasaHack/play-with-numbers)
+
+## Technology: That i Used
+
+- **HTML**, **TailwindCSS**, **JavaScript**
+- **Redux**
