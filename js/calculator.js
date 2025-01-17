@@ -465,11 +465,11 @@ const handleMissingOperand = (input) => {
 };
 
 const dispalyInput = (input) => {
-  common.display.innerHTML = input.toUpperCase();
+  common.display.innerHTML = input?.toUpperCase();
 };
 
 const displayConversion = (result) => {
-  common.conversionResult.innerHTML = result.toUpperCase();
+  common.conversionResult.innerHTML = result?.toUpperCase();
 };
 
 const handleDisabledORKeys = (mode) => {
