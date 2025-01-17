@@ -1,19 +1,30 @@
 class Arithmetic {
   constructor(base) {
-    if (!["2", "8", "10", "16"].includes(base.toString())) {
+    if (
+      ![this.base.bin, this.base.oct, this.base.dec, this.base.hex].includes(
+        base
+      )
+    ) {
       throw Error("Base Must be 2, 8, 10, or 16");
     }
     this.base = base;
   }
 
-  isCrossBase = (numbers) => {
+  base = {
+    bin: 2,
+    oct: 8,
+    dec: 10,
+    hex: 16,
+  };
+
+  isCrossBase = (numbers, operationType) => {
     numbers.forEach((number, i) => {
       number
         .toString()
         .split("")
         .forEach((digit) => {
           if (Number(digit) >= this.base) {
-            let err = `Invalid Digit for Binary Multiplication at arguments-${i}: ${numbers[i]}`;
+            let err = `Invalid Digit for ${operationType} at arguments-${i}: ${numbers[i]}`;
             throw Error(err);
           }
         });
@@ -21,25 +32,16 @@ class Arithmetic {
   };
 
   parseToDecimal = (number, base) => {
-    if (this.base <= 10) {
+    if (this.base <= this.base.dec) {
       return parseFloat(number, base);
     } else {
-      if (number.toString().includes(".")) {
-        let [int, frac] = number.toString().split(".");
-
-        int = parseInt(int, base);
-        frac = parseInt(frac, base);
-
-        return Number(int + "." + frac);
-      } else {
-        return parseInt(number, base);
-      }
+      return Number(eval("0x" + number));
     }
   };
 
   addition(addend) {
     // Check if any digit of a numbers that cross the tergeted base
-    this.isCrossBase(addend);
+    this.isCrossBase(addend, "addition");
 
     // perform addition
     let sum = addend.reduce(
@@ -52,7 +54,7 @@ class Arithmetic {
 
   subtraction(sequentialSubtractor) {
     // Check if any digit of a numbers that cross the tergeted base
-    this.isCrossBase(sequentialSubtractor);
+    this.isCrossBase(sequentialSubtractor, "Subtraction");
 
     // perform subtraction
     let subtract = sequentialSubtractor.reduce(
@@ -65,7 +67,7 @@ class Arithmetic {
 
   multiply(factor) {
     // Check if any digit of a numbers that cross the tergeted base
-    this.isCrossBase(factor);
+    this.isCrossBase(factor, "Multiplication");
 
     // perform multiply
     let product = factor.reduce(
@@ -78,7 +80,7 @@ class Arithmetic {
 
   division(sequentialDivisor) {
     // Check if any digit of a numbers that cross the tergeted base
-    this.isCrossBase(sequentialDivisor);
+    this.isCrossBase(sequentialDivisor, "Division");
 
     // perform division
     const quotient = sequentialDivisor.reduce(
@@ -92,7 +94,7 @@ class Arithmetic {
 
   remainder(sequentialRemainder) {
     // Check if any digit of a numbers that cross the tergeted base
-    this.isCrossBase(sequentialRemainder);
+    this.isCrossBase(sequentialRemainder, "Remainder");
 
     // perform division
     const quotient = sequentialRemainder.reduce(
@@ -112,7 +114,7 @@ class Arithmetic {
       /(?<![0-9a-fA-Fx])\b([0-9]+(?:\.[0-9]+)?|[a-zA-Z][a-zA-Z0-9]*)\b/g;
 
     try {
-      if (this.base <= 10) {
+      if (this.base <= this.base.dec) {
         return eval(validateMDoperator).toString(this.base);
       } else {
         return eval(validateMDoperator.replace(regex, "0x$1")).toString(
