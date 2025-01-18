@@ -1,13 +1,12 @@
-class Arithmetic {
+import Conversion from "./Conversion.js";
+
+class Arithmetic extends Conversion {
   constructor(base) {
-    if (
-      ![this.base.bin, this.base.oct, this.base.dec, this.base.hex].includes(
-        base
-      )
-    ) {
+    super();
+    if (!Object.values(this.base).includes(base)) {
       throw Error("Base Must be 2, 8, 10, or 16");
     }
-    this.base = base;
+    this.currentBase = base;
   }
 
   base = {
@@ -23,7 +22,7 @@ class Arithmetic {
         .toString()
         .split("")
         .forEach((digit) => {
-          if (Number(digit) >= this.base) {
+          if (Number(digit) >= this.currentBase) {
             let err = `Invalid Digit for ${operationType} at arguments-${i}: ${numbers[i]}`;
             throw Error(err);
           }
@@ -32,10 +31,19 @@ class Arithmetic {
   };
 
   parseToDecimal = (number, base) => {
-    if (this.base <= this.base.dec) {
-      return parseFloat(number, base);
-    } else {
-      return Number(eval("0x" + number));
+    switch (base) {
+      case this.base.bin: {
+        return Number(this.BinaryToDecimal(number));
+      }
+      case this.base.oct: {
+        return Number(this.OctalToDecimal(number));
+      }
+      case this.base.dec: {
+        return Number(number);
+      }
+      case this.base.hex: {
+        return Number(this.hexadecimalToDecimal(number));
+      }
     }
   };
 
@@ -46,10 +54,10 @@ class Arithmetic {
     // perform addition
     let sum = addend.reduce(
       (prev, acc) =>
-        this.parseToDecimal(prev, this.base) +
-        this.parseToDecimal(acc, this.base)
+        this.parseToDecimal(prev, this.currentBase) +
+        this.parseToDecimal(acc, this.currentBase)
     );
-    return sum.toString(this.base);
+    return sum.toString(this.currentBase);
   }
 
   subtraction(sequentialSubtractor) {
@@ -59,10 +67,10 @@ class Arithmetic {
     // perform subtraction
     let subtract = sequentialSubtractor.reduce(
       (prev, acc) =>
-        this.parseToDecimal(prev, this.base) -
-        this.parseToDecimal(acc, this.base)
+        this.parseToDecimal(prev, this.currentBase) -
+        this.parseToDecimal(acc, this.currentBase)
     );
-    return subtract.toString(this.base);
+    return subtract.toString(this.currentBase);
   }
 
   multiply(factor) {
@@ -72,10 +80,10 @@ class Arithmetic {
     // perform multiply
     let product = factor.reduce(
       (prev, acc) =>
-        this.parseToDecimal(prev, this.base) *
-        this.parseToDecimal(acc, this.base)
+        this.parseToDecimal(prev, this.currentBase) *
+        this.parseToDecimal(acc, this.currentBase)
     );
-    return product.toString(this.base);
+    return product.toString(this.currentBase);
   }
 
   division(sequentialDivisor) {
@@ -85,11 +93,11 @@ class Arithmetic {
     // perform division
     const quotient = sequentialDivisor.reduce(
       (prev, acc) =>
-        this.parseToDecimal(prev, this.base) /
-        this.parseToDecimal(acc, this.base)
+        this.parseToDecimal(prev, this.currentBase) /
+        this.parseToDecimal(acc, this.currentBase)
     );
 
-    return quotient.toString(this.base);
+    return quotient.toString(this.currentBase);
   }
 
   remainder(sequentialRemainder) {
@@ -99,11 +107,11 @@ class Arithmetic {
     // perform division
     const quotient = sequentialRemainder.reduce(
       (prev, acc) =>
-        this.parseToDecimal(prev, this.base) %
-        this.parseToDecimal(acc, this.base)
+        this.parseToDecimal(prev, this.currentBase) %
+        this.parseToDecimal(acc, this.currentBase)
     );
 
-    return quotient.toString(this.base);
+    return quotient.toString(this.currentBase);
   }
 
   // Perform calculation with eval function if all the operators are not same
@@ -114,11 +122,11 @@ class Arithmetic {
       /(?<![0-9a-fA-Fx])\b([0-9]+(?:\.[0-9]+)?|[a-zA-Z][a-zA-Z0-9]*)\b/g;
 
     try {
-      if (this.base <= this.base.dec) {
-        return eval(validateMDoperator).toString(this.base);
+      if (this.currentBase <= this.base.dec) {
+        return eval(validateMDoperator).toString(this.currentBase);
       } else {
         return eval(validateMDoperator.replace(regex, "0x$1")).toString(
-          this.base
+          this.currentBase
         );
       }
     } catch (error) {
